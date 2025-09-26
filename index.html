@@ -8,8 +8,8 @@
   <style>
     :root{
       --bg:#0b0f12; /* near black */
-      --bg-2:#42174e /* dark purple */
-      --bg-3:#0a0e54 /* dark blue*/
+      --bg-2:#42174e; /* dark purple */
+      --bg-3:#0a0e54; /* dark blue*/
       --card:#071021; /* black-blue */
       --muted:#8aa6b1;
       --accent:#c16cee; /* vibrant pink */
@@ -26,7 +26,7 @@
     html,body{height:100%}
     body{
       margin:0;
-      background:linear-gradient(to bottom, #0b0f12, #0a0e54);
+      background:radial-gradient(circle at center, #0b0f12, #0a0e54);
       color:#e6f3f2;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
@@ -71,7 +71,7 @@
     main{display:grid;grid-template-columns:1fr 320px;gap:20px}
 
     .catalog{
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      background:linear-gradient(to bottom, transparent, #42174e);
       padding:18px;border-radius:18px;box-shadow:var(--shadow);
     }
 
@@ -179,7 +179,7 @@
         <div class="thumb" id="m-img"><img src="https://via.placeholder.com/800x500?text=Product" alt="product image"></div>
         <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
           <div style="font-weight:800;color:var(--accent);font-size:20px" id="m-price">$0.00</div>
-          <a id="m-link" class="btn" target="_blank" rel="noopener noreferrer">View on eBay</a>
+          <a id="m-link" class="btn" target="_blank" rel="noopener noreferrer">Buy Now!</a>
         </div>
       </div>
     </div>
@@ -191,42 +191,42 @@
     const PRODUCT_DATA = [
       {
         id: 'p1',
-        title: 'Common Lucky Block',
+        title: '~ Common Lucky Block ~',
         price: 4.99,
-        img: '/1.png',
+        img: '1.png',
         url: 'out-of-stock.html'
       },
       {
         id: 'p2',
-        title: 'Uncommon Lucky Block',
+        title: '~ Uncommon Lucky Block ~',
         price: 9.99,
         img: '2.png',
         url: 'out-of-stock.html'
       },
       {
         id: 'p3',
-        title: 'Rare Lucky Block',
+        title: '~ Rare Lucky Block ~',
         price: 19.99,
         img: '3.png',
         url: 'out-of-stock.html'
       },
       {
         id: 'p4',
-        title: 'Legendary Lucky Block',
+        title: '~ Legendary Lucky Block ~',
         price: 29.99,
         img: '4.png',
         url: 'out-of-stock.html'
       },
       {
         id: 'p5',
-        title: 'Premium Lucky Block',
+        title: '~ Premium Lucky Block ~',
         price: 39.99,
         img: '5.png',
         url: 'out-of-stock.html'
       },
       {
         id: 'p6',
-        title: 'Mythic Lucky Block',
+        title: '~ Mythic Lucky Block ~',
         price: 49.99,
         img: '6.png',
         url: 'out-of-stock.html'
@@ -250,7 +250,7 @@
     let items = [...PRODUCT_DATA];
     let activeCat = 'all';
 
-    function formatPrice(p){ return '$' + Number(p).toFixed(2); }
+    function formatPrice(p){ return 'Price: $' + Number(p).toFixed(2); }
 
     function render(){
       const term = q.value.trim().toLowerCase();
@@ -283,7 +283,7 @@
           <div class="actions">
             <a class="link-ebay" 
               href="${it.url}" 
-              ${it.url.endsWith('.html') ? '' : 'target="_blank" rel="noopener noreferrer"'}>View on eBay</a>
+              ${it.url.endsWith('.html') ? '' : 'target="_blank" rel="noopener noreferrer"'}>Buy Now!</a>
             <button class="btn" data-id="${it.id}">Quick View</button>
           </div>
         `;
