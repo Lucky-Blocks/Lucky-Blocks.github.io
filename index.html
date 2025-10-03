@@ -4,26 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Lucky Blocks Official Store</title>
-  <meta name="description" content="The official store to buy Lucky Blocks. All purchases are made on eBay.">
+  <meta name="description" content="The official store to buy Lucky Blocks. All purchases are made securely with Stripe.">
   <style>
     :root{
-      --bg:#0b0f12; /* near black */
-      --bg-2:#42174e; /* dark purple */
-      --bg-3:#0a0e54; /* dark blue*/
-      --card:#071021; /* black-blue */
+      --bg:#0b0f12;
+      --bg-2:#42174e;
+      --bg-3:#0a0e54;
+      --card:#071021;
       --muted:#8aa6b1;
-      --accent:#c16cee; /* vibrant pink */
-      --accent-2:#1e90ff; /* electric blue */
+      --accent:#c16cee;
+      --accent-2:#1e90ff;
       --glass: rgba(255,255,255,0.03);
       --radius:14px;
       --max-width:1100px;
       --shadow: 0 6px 20px rgba(2,6,23,0.6);
       color-scheme: dark;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
       background:radial-gradient(circle at center, #0b0f12, #0a0e54);
@@ -33,54 +32,26 @@
       display:flex;
       justify-content:center;
       padding:32px 16px;
+      flex-direction:column;
+      min-height:100vh;
     }
 
-    .container{
-      width:100%;
-      max-width:var(--max-width);
-    }
-
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:20px;
-    }
-
-    .brand{
-      display:flex;align-items:center;gap:12px;
-    }
-    .logo{
-      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:grid;place-items:center;font-weight:700;color:#021018;box-shadow:var(--shadow);
-    }
+    .container{width:100%;max-width:var(--max-width);margin:auto;flex:1}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#021018;box-shadow:var(--shadow)}
     h1{font-size:18px;margin:0}
     p.lead{margin:0;color:var(--muted);font-size:13px}
 
-    .controls{
-      display:flex;gap:10px;align-items:center;
-    }
-
-    .search{background:var(--glass);border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;display:flex;align-items:center;gap:8px;min-width:220px}
-    .search input{background:transparent;border:0;color:inherit;outline:none;width:180px}
-
-    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;padding:10px 14px;border-radius:10px;color:#021018;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(30,144,255,0.12)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.05);color:var(--muted);padding:8px 12px}
+    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;padding:8px 12px;border-radius:10px;color:#021018;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(30,144,255,0.12);font-size:13px}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.05);color:var(--muted)}
 
     main{display:grid;grid-template-columns:1fr 320px;gap:20px}
-
-    .catalog{
-      background:linear-gradient(to bottom, transparent, #42174e);
-      padding:18px;border-radius:18px;box-shadow:var(--shadow);
-    }
-
+    .catalog{background:linear-gradient(to bottom, transparent, #42174e);padding:18px;border-radius:18px;box-shadow:var(--shadow)}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 
-    .card{
-      background:linear-gradient(180deg,var(--card), rgba(0,0,0,0.3));padding:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px;transition:transform .22s ease, box-shadow .22s ease;
-    }
-    .card:focus-within, .card:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(10,20,30,0.6)}
+    .card{background:linear-gradient(180deg,var(--card), rgba(0,0,0,0.3));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px;transition:transform .22s ease, box-shadow .22s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(10,20,30,0.6)}
 
     .thumb{width:100%;aspect-ratio:1.2/1;background:#041824;border-radius:10px;display:grid;place-items:center;overflow:hidden}
     .thumb img{width:100%;height:100%;object-fit:cover;display:block}
@@ -90,262 +61,270 @@
     .price{font-weight:800;color:var(--accent);font-size:15px}
     .subtitle{color:var(--muted);font-size:13px}
 
-    .actions{display:flex;gap:8px;margin-top:auto}
-    .link-ebay{flex:1;text-align:center;padding:10px 8px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--accent-2);text-decoration:none;font-weight:700}
+    .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+    .actions .btn{flex:1;min-width:90px;text-align:center}
 
     aside.panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:18px;box-shadow:var(--shadow);height:max-content}
     .panel h3{margin-top:0}
     .filter-group{display:flex;flex-direction:column;gap:8px}
-    .chip{padding:8px 10px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);cursor:pointer}
-    .chip.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021018;border:0}
 
-    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+    #cart{margin-top:20px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.05)}
+    #cart-items{font-size:13px;color:#e6f3f2;margin-bottom:10px}
+    #cart-total{font-weight:700;margin-bottom:10px}
 
     /* modal */
-    .modal-backdrop{position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5),rgba(0,0,0,0.65));display:none;align-items:center;justify-content:center;padding:20px}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.65);display:none;align-items:center;justify-content:center;padding:20px}
     .modal{background:linear-gradient(180deg,#07121a, #021018);padding:18px;border-radius:12px;max-width:720px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
     .modal .thumb{aspect-ratio:1.2/1}
     .close{background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer}
 
-    @media (max-width:900px){main{grid-template-columns:1fr}aside.panel{order:2}}
+    footer{
+      margin-top:80px;
+      text-align:center;
+      opacity:0.8;
+      width:100%;
+    }
+    footer .footer-title{
+      font-size:40px;
+      font-weight:900;
+      letter-spacing:4px;
+      color:#ffffff1a;
+    }
+    footer .footer-credits{
+      margin-top:8px;
+      font-size:14px;
+      color:#8aa6b1;
+    }
   </style>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
-<link rel="icon" type="image/png" href="favicon.png">
 <body>
   <div class="container" id="app">
     <header>
       <div class="brand">
-        <div class="logo">
-          <img src='7.png' alt="" style="width:100%;height:100%;object-fit:contain;border-radius:12px;">
-        </div>        
+        <div class="logo"><img src='7.png' alt="" style="width:100%;height:100%;object-fit:contain;border-radius:12px;"></div>
         <div>
           <h1>Lucky Blocks</h1>
           <p class="lead">Welcome to our store! Browse our available Lucky Blocks here.</p>
         </div>
       </div>
-
-      <div class="controls" role="region" aria-label="store controls">
-        <div class="search" role="search">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.5" opacity="0.8"/></svg>
-          <input id="q" placeholder="Search items..." aria-label="Search items">
-        </div>
-      </div>
     </header>
 
     <main>
-      <section class="catalog" aria-labelledby="catalog-heading">
+      <section class="catalog">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <h2 id="catalog-heading" style="margin:0">All Blocks</h2>
+          <h2 style="margin:0">All Blocks</h2>
           <div class="subtitle" id="count">0 items</div>
         </div>
-
-        <div class="grid" id="grid">
-          <!-- product cards injected here -->
-        </div>
-
-        
+        <div class="grid" id="grid"></div>
       </section>
 
-      <aside class="panel" aria-labelledby="filters-heading">
-        <h3 id="filters-heading">Sort</h3>
-        <div class="filter-group">
-          <label class="subtitle">Sort by</label>
-          <select id="sort">
-            <option value="newest">Newest</option>
-            <option value="price-asc">Price — Low to High</option>
-            <option value="price-desc">Price — High to Low</option>
-          </select>
-          <label class="subtitle">Showing</label>
-          <div id="categories" style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="chip" data-cat="all">All</button>
+      <aside class="panel">
+        <h3>Your Cart</h3>
+        <div id="cart-items">Your cart is empty. Add something!</div>
+        <div id="cart-total"></div>
+        <button class="btn" onclick="checkout()">Checkout</button>
 
+        <!-- Reviews Panel directly under checkout -->
+        <div id="reviews-panel" style="margin-top:28px;text-align:center">
+          <div style="font-size:28px;color:#FFD700;letter-spacing:6px;margin-bottom:6px">
+            ★ ★ ★ ★ ★
+          </div>
+          <div style="color:#8aa6b1;font-size:14px;margin-bottom:10px">
+            Rated 4.8/5 by our loyal customers
+          </div>
+          <div id="review-text" style="font-style:italic;color:#e6f3f2;font-size:15px">
+            "This store is amazing!"
           </div>
         </div>
       </aside>
     </main>
 
     <!-- modal -->
-    <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
-      <div class="modal" role="document">
+    <div class="modal-backdrop" id="modal" aria-hidden="true">
+      <div class="modal">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px">
           <div>
             <h3 id="m-title">Title</h3>
-            <div class="subtitle" id="m-sub">Short description</div>
+            <div class="subtitle" id="m-sub">One of five tiered mystery boxes.</div>
           </div>
-          <div>
-            <button class="close" id="m-close" aria-label="Close">✕</button>
-          </div>
+          <div><button class="close" id="m-close">✕</button></div>
         </div>
-        <div class="thumb" id="m-img"><img src="https://via.placeholder.com/800x500?text=Product" alt="product image"></div>
+        <div class="thumb" id="m-img"><img src="https://via.placeholder.com/800x500?text=Product" alt=""></div>
         <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
           <div style="font-weight:800;color:var(--accent);font-size:20px" id="m-price">$0.00</div>
-          <a id="m-link" class="btn" target="_blank" rel="noopener noreferrer">Buy Now!</a>
+          <button id="checkout-btn" class="btn">Add to Cart</button>
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- Footer -->
+  <footer style="margin-top:80px;text-align:center;opacity:0.8">
+    <div class="footer-title" style="font-size:40px;font-weight:900;letter-spacing:4px;color:#ffffff1a">
+      LUCKY BLOCKS
+    </div>
+    <div class="footer-credits" style="margin-top:8px;font-size:14px;color:#8aa6b1">
+      created by <strong>eoqw</strong> and <strong>CraftGamer</strong>
+    </div>
+  </footer>
+
+    <!-- Fixed Contact (Top Right) -->
+  <div style="position:fixed;top:15px;right:20px;z-index:1000;text-align:right">
+    <div style="font-size:13px;color:#8aa6b1;margin-bottom:6px">
+      Questions? Comments? Concerns? Contact us using the sources below.
+    </div>
+    <div style="position:relative;display:inline-block">
+      <button onclick="toggleContact()" style="background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;padding:8px 12px;border-radius:8px;color:#021018;font-weight:600;cursor:pointer;font-size:13px">
+        Contact Us
+      </button>
+      <div id="contactDropdown" style="display:none;position:absolute;right:0;margin-top:6px;background:#071021;border:1px solid rgba(255,255,255,0.1);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.4);min-width:240px;z-index:1001">
+        <div style="padding:10px;color:#e6f3f2;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.05)">
+          📞 Call: <strong>760-330-6384</strong>
+        </div>
+        <div style="padding:10px;color:#e6f3f2;font-size:13px">
+          📧 Email (recommended): <strong>luckyblocks.no.reply@gmail.com</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Copyright (Bottom Left) -->
+  <div style="position:fixed;bottom:10px;left:20px;font-size:12px;color:#8aa6b1;z-index:1000">
+    © 2025 Lucky Loot Boxes (eoqw and CraftGamer)
   </div>
 
   <script>
-    // === Replace this array with your real product data. Each item should include title, price, category, img, url, and optional date (ISO) ===
-    const PRODUCT_DATA = [
-      {
-        id: 'p1',
-        title: '~ Common Lucky Block ~',
-        price: 4.99,
-        img: '1.png',
-        url: 'out-of-stock.html'
-      },
-      {
-        id: 'p2',
-        title: '~ Uncommon Lucky Block ~',
-        price: 9.99,
-        img: '2.png',
-        url: 'out-of-stock.html'
-      },
-      {
-        id: 'p3',
-        title: '~ Rare Lucky Block ~',
-        price: 19.99,
-        img: '3.png',
-        url: 'out-of-stock.html'
-      },
-      {
-        id: 'p4',
-        title: '~ Legendary Lucky Block ~',
-        price: 29.99,
-        img: '4.png',
-        url: 'out-of-stock.html'
-      },
-      {
-        id: 'p5',
-        title: '~ Premium Lucky Block ~',
-        price: 39.99,
-        img: '5.png',
-        url: 'out-of-stock.html'
-      },
-      {
-        id: 'p6',
-        title: '~ Mythic Lucky Block ~',
-        price: 49.99,
-        img: '6.png',
-        url: 'out-of-stock.html'
-      }
-    ];
-
-    // --- UI logic ---
-    const grid = document.getElementById('grid');
-    const q = document.getElementById('q');
-    const count = document.getElementById('count');
-    const modal = document.getElementById('modal');
-    const mTitle = document.getElementById('m-title');
-    const mSub = document.getElementById('m-sub');
-    const mImg = document.getElementById('m-img');
-    const mPrice = document.getElementById('m-price');
-    const mLink = document.getElementById('m-link');
-    const mClose = document.getElementById('m-close');
-    const sort = document.getElementById('sort');
-    const categories = document.getElementById('categories');
-
-    let items = [...PRODUCT_DATA];
-    let activeCat = 'all';
-
-    function formatPrice(p){ return 'Price: $' + Number(p).toFixed(2); }
-
-    function render(){
-      const term = q.value.trim().toLowerCase();
-      let list = items.filter(it => (activeCat === 'all' || it.category === activeCat));
-      if(term) list = list.filter(it => (it.title.toLowerCase().includes(term) || (it.description || '').toLowerCase().includes(term)));
-
-      // sort
-      if(sort.value === 'price-asc') list.sort((a,b)=>a.price-b.price);
-      else if(sort.value === 'price-desc') list.sort((a,b)=>b.price-a.price);
-      else if(sort.value === 'newest') list.sort((a,b)=> (new Date(b.date||0)) - (new Date(a.date||0)));
-
-      grid.innerHTML = '';
-      count.textContent = list.length + ' items';
-
-      if(list.length === 0){
-        grid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);padding:28px;background:transparent;border-radius:8px;text-align:center">No items match your search or filters.</div>';
-        return;
-      }
-
-      for(const it of list){
-        const card = document.createElement('article');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="thumb"><img src="${it.img}" alt="${escapeHtml(it.title)}"></div>
-          <div class="meta">
-            <div class="title">${escapeHtml(it.title)}</div>
-            <div class="price">${formatPrice(it.price)}</div>
-          </div>
-          <div class="subtitle">${escapeHtml(it.category || '')}</div>
-          <div class="actions">
-            <a class="link-ebay" 
-              href="${it.url}" 
-              ${it.url.endsWith('.html') ? '' : 'target="_blank" rel="noopener noreferrer"'}>Buy Now!</a>
-            <button class="btn" data-id="${it.id}">Quick View</button>
-          </div>
-        `;
-        grid.appendChild(card);
-      }
-
-      // attach quick view events
-      grid.querySelectorAll('button[data-id]').forEach(b=>{
-        b.addEventListener('click', ()=>{
-          const id = b.getAttribute('data-id');
-          openModal(items.find(x=>x.id===id));
-        });
-      });
+    function toggleContact(){
+      const dd=document.getElementById("contactDropdown");
+      dd.style.display=(dd.style.display==="block")?"none":"block";
     }
 
-    function openModal(item){
-      if(!item) return;
-      mTitle.textContent = item.title;
-      mSub.textContent = item.description || '';
-      mImg.innerHTML = `<img src="${item.img}" alt="${escapeHtml(item.title)}">`;
-      mPrice.textContent = formatPrice(item.price);
-      mLink.href = item.url;
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden','false');
-      mClose.focus();
-    }
-    function closeModal(){
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden','true');
-    }
-
-    // small helpers
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[c]); }
-
-    // category chips
-    categories.addEventListener('click', e=>{
-      const btn = e.target.closest('.chip'); if(!btn) return;
-      categories.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-      btn.classList.add('active');
-      activeCat = btn.getAttribute('data-cat') || 'all';
-      render();
+    // Close dropdown if clicking outside
+    window.addEventListener("click",function(e){
+      if(!e.target.matches("button") && !e.target.closest("#contactDropdown")){
+        document.getElementById("contactDropdown").style.display="none";
+      }
     });
-
-    // search + sort
-    q.addEventListener('input', render);
-    sort.addEventListener('change', render);
-
-    // modal close
-    mClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
-    window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
-
-    // initial state: activate 'All'
-    categories.querySelector('.chip[data-cat="all"]').classList.add('active');
-    render();
-
-    // accessibility: focus outline visible
-    (function(){
-      function handleFirstTab(e) { if (e.key === 'Tab') { document.body.classList.add('user-is-tabbing'); window.removeEventListener('keydown', handleFirstTab); }}
-      window.addEventListener('keydown', handleFirstTab);
-    })();
-
   </script>
-</body>
-</html>
+
+  <script>
+  const PRODUCT_DATA = [
+    {id:'p1',title:'Common Lucky Block',price:4.99,img:'1.png'},
+    {id:'p2',title:'Uncommon Lucky Block',price:9.99,img:'2.png'},
+    {id:'p3',title:'Rare Lucky Block',price:19.99,img:'3.png'},
+    {id:'p4',title:'Legendary Lucky Block',price:29.99,img:'4.png'},
+    {id:'p5',title:'Premium Lucky Block',price:39.99,img:'5.png'},
+    {id:'p6',title:'Mythic Lucky Block',price:49.99,img:'6.png'}
+  ];
+
+  const grid=document.getElementById("grid");
+  const count=document.getElementById("count");
+  const modal=document.getElementById("modal");
+  const mTitle=document.getElementById("m-title");
+  const mSub=document.getElementById("m-sub");
+  const mImg=document.getElementById("m-img");
+  const mPrice=document.getElementById("m-price");
+  const mClose=document.getElementById("m-close");
+  const checkoutBtn=document.getElementById("checkout-btn");
+
+  let cart=[];
+  let REVIEWS = [];  // will be fetched from server
+  let reviewIndex = 0;
+
+  function formatPrice(p){return "$"+p.toFixed(2);}
+
+  function renderProducts(){
+    grid.innerHTML="";
+    PRODUCT_DATA.forEach(it=>{
+      const card=document.createElement("article");
+      card.className="card";
+      card.innerHTML=`
+        <div class="thumb"><img src="${it.img}" alt="${it.title}"></div>
+        <div class="meta"><div class="title">${it.title}</div><div class="price">${formatPrice(it.price)}</div></div>
+        <div class="actions">
+          <button class="btn ghost" onclick='openModal(${JSON.stringify(it)})'>Quick View</button>
+          <button class="btn" onclick='addToCart(${JSON.stringify(it)})'>Add to Cart</button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    count.textContent=PRODUCT_DATA.length+" items";
+  }
+
+  function openModal(item){
+    mTitle.textContent=item.title;
+    mSub.textContent="Limited edition Lucky Block!";
+    mPrice.textContent=formatPrice(item.price);
+    mImg.innerHTML=`<img src="${item.img}" alt="${item.title}">`;
+    modal.style.display='flex';modal.setAttribute('aria-hidden','false');
+    checkoutBtn.onclick=()=>{addToCart(item);closeModal();};
+  }
+  function closeModal(){modal.style.display='none';modal.setAttribute('aria-hidden','true');}
+  mClose.addEventListener('click',closeModal);
+  modal.addEventListener('click',e=>{if(e.target===modal) closeModal();});
+
+  function addToCart(item){
+    const existing=cart.find(p=>p.id===item.id);
+    if(existing){existing.qty++;}
+    else{cart.push({...item,qty:1});}
+    renderCart();
+  }
+
+  function renderCart(){
+    const cartDiv=document.getElementById("cart-items");
+    const totalDiv=document.getElementById("cart-total");
+    if(cart.length===0){
+      cartDiv.textContent="Your cart is empty. Add something!";
+      totalDiv.textContent="";
+      return;
+    }
+    cartDiv.innerHTML=cart.map(p=>`${p.title} x ${p.qty} — ${formatPrice(p.price*p.qty)}`).join("<br>");
+    const total=cart.reduce((sum,p)=>sum+p.price*p.qty,0);
+    totalDiv.innerHTML=`<strong>Total: ${formatPrice(total)}</strong>`;
+  }
+
+  const stripe=Stripe("pk_test_51SDsfpCDsOEEIRCpVxl8dwYkrc7rO0lJuDJZt5p5OqexR4dZ5wraeES471928vGnQJh4ryvDRHG9MdRoozBDed4J00QPUbESyc"); 
+  async function checkout(){
+    if(cart.length===0){alert("Cart is empty!");return;}
+    try{
+      const res=await fetch("/create-checkout-session",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({items:cart})
+      });
+      const session=await res.json();
+      if(session.error) throw new Error(session.error);
+      const {error}=await stripe.redirectToCheckout({sessionId:session.id});
+      if(error) alert(error.message);
+    }catch(err){console.error(err);alert("Checkout failed.");}
+  }
+
+  // --- Reviews rotation ---
+  async function loadReviews(){
+    try{
+      const res = await fetch("/reviews");
+      if(!res.ok) throw new Error("Failed to load reviews");
+      const data = await res.json();
+      REVIEWS = data.map(r => r.text);  // assuming server returns {text}
+      if(REVIEWS.length === 0) REVIEWS = ["Be the first to leave a review!"];
+    }catch(err){
+      console.error("Error loading reviews:", err);
+      REVIEWS = ["Reviews unavailable at the moment."];
+    }
+  }
+
+  function rotateReviews(){
+    if(REVIEWS.length === 0) return;
+    const reviewBox = document.getElementById("review-text");
+    reviewIndex = (reviewIndex + 1) % REVIEWS.length;
+    reviewBox.textContent = REVIEWS[reviewIndex];
+  }
+
+  setInterval(rotateReviews, 5000);
+
+  // Init
+  renderProducts();
+  renderCart();
+  loadReviews();
+</script>
