@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Lucky Blocks Official Store</title>
+  <link rel="icon" href="favicon.png" type="image/png">
   <meta name="description" content="The official store to buy Lucky Blocks. All purchases are made securely with Stripe.">
   <style>
     :root{
@@ -73,10 +74,16 @@
     #cart-items{font-size:13px;color:#e6f3f2;margin-bottom:10px}
     #cart-total{font-weight:700;margin-bottom:10px}
 
+    /* modal */
     .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.65);display:none;align-items:center;justify-content:center;padding:20px}
     .modal{background:linear-gradient(180deg,#07121a, #021018);padding:18px;border-radius:12px;max-width:720px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
     .modal .thumb{aspect-ratio:1.2/1}
     .close{background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer}
+    #m-sub {
+      color: #ff0000;
+      font-weight: bold;
+      font-size: medium;
+    }
 
     footer{
       margin-top:80px;
@@ -99,11 +106,12 @@
   <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
+  <!-- Password Popup -->
   <div id="password-popup-backdrop" style="
     position:fixed;
     inset:0;
     background:rgba(0,0,0,0.75);
-    display:none;
+    display:none; /* default hidden */
     align-items:center;
     justify-content:center;
     z-index:2000;
@@ -150,12 +158,11 @@
         padding:10px;
         border:none;
         border-radius:8px;
+        color:#021018;
         background:linear-gradient(90deg,#c16cee,#1e90ff);
         font-weight:600;
         cursor:pointer;
-      ">
-        Notify me when we're online
-      </button>
+      ">Notify me when we're online</button>
     </div>
   </div>
   <div class="container" id="app">
@@ -182,8 +189,10 @@
         <h3>Your Cart</h3>
         <div id="cart-items">Your cart is empty. Add something!</div>
         <div id="cart-total"></div>
+        <!-- <a href="cancel.html" class="btn">Checkout</a> -->
         <a class="btn" href="cancel.html">Checkout</a>
 
+        <!-- Reviews Panel directly under checkout -->
         <div id="reviews-panel" style="margin-top:28px;text-align:center">
           <div style="font-size:28px;color:#FFD700;letter-spacing:6px;margin-bottom:6px">
             ★ ★ ★ ★ ★
@@ -198,6 +207,7 @@
       </aside>
     </main>
 
+    <!-- modal -->
     <div class="modal-backdrop" id="modal" aria-hidden="true">
       <div class="modal">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px">
@@ -208,6 +218,9 @@
           <div><button class="close" id="m-close">✕</button></div>
         </div>
         <div class="thumb" id="m-img"><img src="https://via.placeholder.com/800x500?text=Product" alt=""></div>
+        <div id="m-desc" style="margin-top:12px;color:#8aa6b1;font-size:14px;line-height:1.4">
+          Description goes here.
+        </div>        
         <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
           <div style="font-weight:800;color:var(--accent);font-size:20px" id="m-price">$0.00</div>
           <button id="checkout-btn" class="btn">Add to Cart</button>
@@ -216,6 +229,7 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <footer style="margin-top:80px;text-align:center;opacity:0.8">
     <div class="footer-title" style="font-size:40px;font-weight:900;letter-spacing:4px;color:#ffffff1a">
       LUCKY BLOCKS
@@ -225,6 +239,7 @@
     </div>
   </footer>
 
+    <!-- Fixed Contact (Top Right) -->
   <div style="position:fixed;top:15px;right:20px;z-index:1000;text-align:right">
     <div style="font-size:13px;color:#8aa6b1;margin-bottom:6px">
       Questions? Comments? Concerns? Contact us using the sources below.
@@ -244,6 +259,7 @@
     </div>
   </div>
 
+  <!-- Fixed Copyright (Bottom Left) -->
   <div style="position:fixed;bottom:10px;left:20px;font-size:12px;color:#8aa6b1;z-index:1000">
     © 2025 Lucky Loot Boxes (eoqw and CraftGamer)
   </div>
@@ -253,6 +269,7 @@
       dd.style.display=(dd.style.display==="block")?"none":"block";
     }
 
+    // Close dropdown if clicking outside
     window.addEventListener("click",function(e){
       if(!e.target.matches("button") && !e.target.closest("#contactDropdown")){
         document.getElementById("contactDropdown").style.display="none";
@@ -262,13 +279,50 @@
 
   <script>
   const PRODUCT_DATA = [
-    {id:'p1',title:'Common Lucky Block',price:4.99,img:'1.png'},
-    {id:'p2',title:'Uncommon Lucky Block',price:9.99,img:'2.png'},
-    {id:'p3',title:'Rare Lucky Block',price:19.99,img:'3.png'},
-    {id:'p4',title:'Legendary Lucky Block',price:29.99,img:'4.png'},
-    {id:'p5',title:'Premium Lucky Block',price:39.99,img:'5.png'},
-    {id:'p6',title:'Mythic Lucky Block',price:49.99,img:'6.png'}
+    {
+      id:'p1',
+      title:'Common Lucky Block',
+      price:4.99,
+      img:'1.png',
+      description:'Rewards up to 4x block value!'
+    },
+    {
+      id:'p2',
+      title:'Uncommon Lucky Block',
+      price:9.99,
+      img:'2.png',
+      description:'Includes better loot and higher drop chances than the Common block.'
+    },
+    {
+      id:'p3',
+      title:'Rare Lucky Block',
+      price:19.99,
+      img:'3.png',
+      description:'Contains rare gear, cosmetics, and boosted multipliers.'
+    },
+    {
+      id:'p4',
+      title:'Legendary Lucky Block',
+      price:29.99,
+      img:'4.png',
+      description:'Offers high-tier equipment, rare skins, and premium rewards.'
+    },
+    {
+      id:'p5',
+      title:'Premium Lucky Block',
+      price:39.99,
+      img:'5.png',
+      description:'Huge reward pool. Includes exclusive items and boosted luck.'
+    },
+    {
+      id:'p6',
+      title:'Mythic Lucky Block',
+      price:49.99,
+      img:'6.png',
+      description:'Top-tier block with ultra-rare drops and guaranteed bonuses.'
+    }
   ];
+
 
   const grid=document.getElementById("grid");
   const count=document.getElementById("count");
@@ -281,7 +335,7 @@
   const checkoutBtn=document.getElementById("checkout-btn");
 
   let cart=[];
-  let REVIEWS = [];
+  let REVIEWS = [];  // will be fetched from server
   let reviewIndex = 0;
 
   function formatPrice(p){return "$"+p.toFixed(2);}
@@ -305,13 +359,24 @@
   }
 
   function openModal(item){
-    mTitle.textContent=item.title;
-    mSub.textContent="Limited edition Lucky Block!";
-    mPrice.textContent=formatPrice(item.price);
-    mImg.innerHTML=`<img src="${item.img}" alt="${item.title}">`;
-    modal.style.display='flex';modal.setAttribute('aria-hidden','false');
-    checkoutBtn.onclick=()=>{addToCart(item);closeModal();};
+    mTitle.textContent = item.title;
+    mSub.textContent = "Out of stock!";
+    mPrice.textContent = formatPrice(item.price);
+    mImg.innerHTML = `<img src="${item.img}" alt="${item.title}">`;
+
+    // NEW: Apply unique description
+    const mDesc = document.getElementById("m-desc");
+    mDesc.textContent = item.description || "No description available.";
+
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+
+    checkoutBtn.onclick = () => {
+      addToCart(item);
+      closeModal();
+    };
   }
+
   function closeModal(){modal.style.display='none';modal.setAttribute('aria-hidden','true');}
   mClose.addEventListener('click',closeModal);
   modal.addEventListener('click',e=>{if(e.target===modal) closeModal();});
@@ -352,12 +417,13 @@
     }catch(err){console.error(err);alert("Checkout failed.");}
   }
 
+  // --- Reviews rotation ---
   async function loadReviews(){
     try{
       const res = await fetch("/reviews");
       if(!res.ok) throw new Error("Failed to load reviews");
       const data = await res.json();
-      REVIEWS = data.map(r => r.text);
+      REVIEWS = data.map(r => r.text);  // assuming server returns {text}
       if(REVIEWS.length === 0) REVIEWS = ["Be the first to leave a review!"];
     }catch(err){
       console.error("Error loading reviews:", err);
@@ -374,6 +440,7 @@
 
   setInterval(rotateReviews, 5000);
 
+  // Init
   renderProducts();
   renderCart();
   loadReviews();
@@ -381,12 +448,14 @@
 
   const CORRECT_PASSWORD = "letmein";
 
+  // Always show the popup on page load
   document.getElementById("password-popup-backdrop").style.display = "flex";
 
   function checkPassword() {
     const pw = document.getElementById("pw-input").value;
 
     if (pw === CORRECT_PASSWORD) {
+      // Do NOT store in localStorage anymore
       document.getElementById("password-popup-backdrop").style.display = "none";
     } else {
       alert("Incorrect password!");
