@@ -184,7 +184,7 @@
 
     /* Fixed elements responsive */
     @media(max-width:600px){
-      .fixed-contact, .fixed-copy{
+      .fixed-copy{
         font-size:11px !important;
         max-width:80%;
         line-break:anywhere;
@@ -252,7 +252,7 @@
           <button id="m-close" class="btn ghost" style="padding:4px 10px;">✕</button>
         </div>
         <div class="thumb" id="m-img"><img src="https://via.placeholder.com/800x500?text=Product"></div>
-        <div id="m-desc" style="margin-top:12px;color:#8aa6b1;font-size:14px;line-height:1.4">Description goes here.</div>
+        <div id="m-desc" style="margin-top:13px;color:#8aa6b1;font-size:14px;line-height:1.4">Description goes here.</div>
         <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap">
           <div id="m-price" style="font-weight:800;color:var(--accent);font-size:20px">$0.00</div>
           <button id="checkout-btn" class="btn">Add to Cart</button>
@@ -266,16 +266,13 @@
     <div class="footer-credits">created by <strong>eoqw</strong> and <strong>CraftGamer</strong></div>
   </footer>
 
-  <div class="fixed-contact" style="position:fixed;top:15px;right:20px;z-index:1000;text-align:right;max-width:260px;">
-    <div style="font-size:13px;color:#8aa6b1;margin-bottom:6px">Questions? Comments? Concerns? Contact us below.</div>
+  <div class="fixed-copy" style="position:fixed;bottom:10px;left:20px;font-size:12px;color:#8aa6b1;z-index:1000">© 2025 Lucky Loot Boxes - Questions? Comments? Concerns?
     <button onclick="toggleContact()" class="btn" style="padding:8px 12px;font-size:13px">Contact Us</button>
-    <div id="contactDropdown" style="display:none;position:absolute;right:0;margin-top:6px;background:#071021;border:1px solid rgba(255,255,255,0.1);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.4);min-width:240px;z-index:1001">
-      <div style="padding:10px;color:#e6f3f2;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.05)">📞 Call: <strong>760-330-6384</strong></div>
-      <div style="padding:10px;color:#e6f3f2;font-size:13px">📧 Email: <strong>luckyblocks.no.reply@gmail.com</strong></div>
-    </div>
+        <div id="contactDropdown" style="display:none;position:absolute;bottom:30px;margin-top:6px;background:#071021;border:1px solid rgba(255,255,255,0.1);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.4);min-width:240px;z-index:1001">
+        <div style="padding:10px;color:#e6f3f2;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.05)">📞 Call: <strong>760-330-6384</strong></div>
+        <div style="padding:10px;color:#e6f3f2;font-size:13px">📧 Email: <strong>luckyblocks.no.reply@gmail.com</strong></div>
+        </div>
   </div>
-
-  <div class="fixed-copy" style="position:fixed;bottom:10px;left:20px;font-size:12px;color:#8aa6b1;z-index:1000">© 2025 Lucky Loot Boxes</div>
 
   <script>
     function toggleContact(){
@@ -288,9 +285,7 @@
         document.getElementById("contactDropdown").style.display="none";
       }
     });
-  </script>
 
-  <script>
     const PRODUCT_DATA=[
       {id:'p1',title:'Common Lucky Block',price:4.99,img:'1.png',description:'Rewards up to 4x block value!'},
       {id:'p2',title:'Uncommon Lucky Block',price:9.99,img:'2.png',description:'Includes better loot and higher drop chances.'},
